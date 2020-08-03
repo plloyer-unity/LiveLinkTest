@@ -26,7 +26,7 @@ public class TestScript : MonoBehaviour
         CreateEntity(obj, world, sectionEntity, sceneGuid);
         foreach (var w in World.All)
         {
-            if (w.Name.StartsWith("Converted"))
+            if (w.Name.Contains("Shadow"))
                 CreateEntity(obj, w, sectionEntity, sceneGuid);
         }
 
