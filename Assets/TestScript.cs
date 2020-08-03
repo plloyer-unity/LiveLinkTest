@@ -6,21 +6,6 @@ using Unity.Transforms;
 
 public class TestScript : MonoBehaviour
 {
-    public GameObject ObjectToSpawn;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Instantiate(ObjectToSpawn);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-
-    }
-
     public void SpawnGameObjectAndPrefab()
     {
         UnityEngine.Assertions.Assert.IsTrue(World.DefaultGameObjectInjectionWorld.IsCreated, "No world");
