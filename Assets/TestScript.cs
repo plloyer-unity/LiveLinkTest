@@ -18,6 +18,22 @@ public class TestScript : MonoBehaviour
 
         // Create matching Entity
         var world = World.DefaultGameObjectInjectionWorld;
+        CreateEntity(obj, world);
+        foreach (var w in World.All)
+        {
+            if (w.Name.StartsWith("Converted"))
+                CreateEntity(obj, w);
+        }
+        
+
+        // Register object for conversion (triggers a live-link update)
+        Undo.RegisterCreatedObjectUndo(obj, "Create Object");
+    }
+
+    void CreateEntity(GameObject obj, World world)
+    {
+        Debug.Log("Added entity to world: " + world.Name);
+        
         var manager = world.EntityManager;
         var entity = manager.CreateEntity();
         manager.SetName(entity, "MyEntity");
@@ -35,8 +51,5 @@ public class TestScript : MonoBehaviour
         var sectionEntity = manager.GetBuffer<ResolvedSectionEntity>(sceneEntity)[0].SectionEntity;
         manager.AddSharedComponentData(entity, new SceneTag{ SceneEntity = sectionEntity });
         manager.AddSharedComponentData(entity, new SceneSection { SceneGUID = sceneGuid });
-
-        // Register object for conversion (triggers a live-link update)
-        Undo.RegisterCreatedObjectUndo(obj, "Create Object");
     }
 }
